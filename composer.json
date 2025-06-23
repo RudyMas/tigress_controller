@@ -16,6 +16,9 @@
     "php": ">=8.4",
     "ext-pdo": "*"
   },
+  "require-dev": {
+    "tigress/core": "^2025"
+  },
   "autoload": {
     "psr-4": {
       "Tigress\\": "src/"
