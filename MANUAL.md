@@ -44,7 +44,7 @@ class AdminController extends Controller
 {
     public function dashboard(): void
     {
-        $this->checkRights('admin');
+        $this->checkRights('access');
         // user is authorized — proceed
     }
 }
@@ -89,11 +89,11 @@ class UserController extends Controller
 {
     public function list(): void
     {
-        $this->checkRights('user:view');
+        $this->checkRights('write');
 
         $repoClass = $this->tableNameToClass('users');
         $repo = new $repoClass();
-        $users = $repo->findAll();
+        $users = $repo->loadAll();
 
         // render view...
     }
@@ -111,33 +111,6 @@ tigress/controller ─── requires ─── php >= 8.5
 
 The `tigress/core` package is a **dev dependency** but is expected to be available at runtime in any real application using the full Tigress Framework.
 
-## Development
-
-Clone and install:
-
-```bash
-git clone <repo>
-cd tigress_controller
-composer install
-```
-
-### Adding tests
-
-The repository currently has no tests. To add PHPUnit:
-
-```bash
-composer require --dev phpunit/phpunit
-mkdir tests
-```
-
-Then add a `scripts` section to `composer.json`:
-
-```json
-"scripts": {
-    "test": "phpunit"
-}
-```
-
 ## Version
 
 Current version: **2025.12.09** (returned by `Controller::version()`)
@@ -145,3 +118,7 @@ Current version: **2025.12.09** (returned by `Controller::version()`)
 ## License
 
 GNU General Public License v3.0 or later (GPL-3.0-or-later).
+
+## Future Plans
+
+This module is intentionally minimalistic. It will probably grow when certain actions become repetitive across controllers.
